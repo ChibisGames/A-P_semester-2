@@ -10,4 +10,7 @@ class Ellipse
     Ellipse(const Ellipse &e);
     ~Ellipse();
     void normalize_axis(int &a, int &b);
+    int count_hyperparametr();
+    void set_all(int h_coord, int k_coord, int par_a, int par_b);
+    void get_all(int &h_coord, int &k_coord, int &par_a, int &par_b);
 };
