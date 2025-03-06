@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Ellipse::Ellipse(int h_coord, int k_coord, int a_par, int b_par)
+Ellipse::Ellipse(double h_coord, double k_coord, double a_par, double b_par)
 {
     h = h_coord;
     k = k_coord;
@@ -26,7 +26,7 @@ Ellipse::Ellipse(const Ellipse &e)
 
 Ellipse::~Ellipse(){}
 
-void Ellipse::normalize_axis(int &par1, int &par2)
+void Ellipse::normalize_axis(double &par1, double &par2)
 {
     int temp;
 
@@ -38,12 +38,12 @@ void Ellipse::normalize_axis(int &par1, int &par2)
     }
 }
 
-int Ellipse::count_hyperparametr()
+double Ellipse::count_hyperparametr()
 {
     return sqrt(pow(a, 2) - pow(b, 2));
 }
 
-void Ellipse::set_all(int h_coord, int k_coord, int par_a, int par_b)
+void Ellipse::set_all(double h_coord, double k_coord, double par_a, double par_b)
 {
     h = h_coord;
     k = k_coord;
@@ -51,7 +51,7 @@ void Ellipse::set_all(int h_coord, int k_coord, int par_a, int par_b)
     b = par_b;
 }
 
-void Ellipse::get_all(int &h_coord, int &k_coord, int &par_a, int &par_b)
+void Ellipse::get_all(double &h_coord, double &k_coord, double &par_a, double &par_b)
 {
     h_coord = h;
     k_coord = k;
@@ -59,9 +59,9 @@ void Ellipse::get_all(int &h_coord, int &k_coord, int &par_a, int &par_b)
     par_b = b;
 }
 
-int* Ellipse::point_coordinates()
+double* Ellipse::point_coordinates()
 {
-    int p_coord[8] = {h - a, k,
+    double p_coord[8] = {h - a, k,
                     h + a, k,
                     h, k - a,
                     h, k + a};
@@ -69,9 +69,9 @@ int* Ellipse::point_coordinates()
         return p_coord;
 }
 
-int* Ellipse::focus_coordinates()
+double* Ellipse::focus_coordinates()
 {
-    int f_coord[8] = {h - count_hyperparametr(), k,
+    double f_coord[8] = {h - count_hyperparametr(), k,
                       h + count_hyperparametr(), k,
                       h, k - count_hyperparametr(),
                       h, k + count_hyperparametr()};
