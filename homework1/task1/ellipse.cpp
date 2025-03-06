@@ -85,6 +85,7 @@ void Ellipse::count_excentritet()
     cout<< "e = " << count_hyperparametr() / a <<endl;;
 }
 
+
 void Ellipse::print_data()
 {
     cout<< "-----------DATA-----------" <<endl;
