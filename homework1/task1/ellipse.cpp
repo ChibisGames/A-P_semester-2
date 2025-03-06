@@ -89,6 +89,10 @@ void Ellipse::count_excentritet()
 void Ellipse::print_data()
 {
     cout<< "-----------DATA-----------" <<endl;
-    cout<< "1)  (x - " << h << ")^2 / " << pow(a, 2) << " + (y - " << k << ")^2 / " << pow(b, 2) << "= 1" <<endl;
-    cout<< "2)  C(" << h << ", " << k << ")" <<endl; 
+    cout<< "(x - " << h << ")^2 / " << pow(a, 2) << " + (y - " << k << ")^2 / " << pow(b, 2) << " = 1\n" <<endl;
+    cout<< "C(" << h << ", " << k << ")" <<endl;
+    cout<<endl;
+    point_coordinates();
+    cout<<endl;
+    focus_coordinates();
 }
