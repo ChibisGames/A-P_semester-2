@@ -99,6 +99,7 @@ void Ellipse::print_data()
 
 void Ellipse::inside_status(double x, double y)
 {
-    if ((pow((x - h) / a, 2) + pow((y - k) / b, 2)) <= 1) {cout<< "Точка в границах эллипса" <<endl;}
+    if ((pow((x - h) / a, 2) + pow((y - k) / b, 2)) < 1) {cout<< "Точка внутри эллипса" <<endl;}
+    else if ((pow((x - h) / a, 2) + pow((y - k) / b, 2)) == 1) {cout<< "Точка принадлежит эллипсу" <<endl;}
     else {cout<< "Точка вне эллипса" <<endl;}
 }
