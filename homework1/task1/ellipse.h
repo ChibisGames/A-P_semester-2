@@ -19,4 +19,6 @@ class Ellipse
     void count_excentritet();
     void print_data();
     void inside_status(double x, double y);
+    double calculate_perimeter();
+    double calculate_square();
 };

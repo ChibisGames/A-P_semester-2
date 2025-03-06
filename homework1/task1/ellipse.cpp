@@ -103,3 +103,13 @@ void Ellipse::inside_status(double x, double y)
     else if ((pow((x - h) / a, 2) + pow((y - k) / b, 2)) == 1) {cout<< "Точка принадлежит эллипсу" <<endl;}
     else {cout<< "Точка вне эллипса" <<endl;}
 }
+
+double Ellipse::calculate_perimeter()
+{
+    return acos(-1) * (3 * (a + b) - sqrt((3 * a + b) * (a + 3 * b)));
+}
+
+double Ellipse::calculate_square()
+{
+    return acos(-1) * a * b;
+}
