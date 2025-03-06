@@ -13,9 +13,9 @@ class Ellipse
     double count_hyperparametr();
     void set_all(double h_coord, double k_coord, double par_a, double par_b);
     void get_all(double &h_coord, double &k_coord, double &par_a, double &par_b);
-    double* point_coordinates();
-    double* focus_coordinates();
-    double count_loc_hord();
-    double count_excentritet();
+    void point_coordinates();
+    void focus_coordinates();
+    void count_loc_hord();
+    void count_excentritet();
     void print_data();
 };

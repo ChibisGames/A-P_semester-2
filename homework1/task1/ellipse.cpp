@@ -28,7 +28,7 @@ Ellipse::~Ellipse(){}
 
 void Ellipse::normalize_axis(double &par1, double &par2)
 {
-    int temp;
+    double temp;
 
     if (par1 > par2)
     {
@@ -59,47 +59,35 @@ void Ellipse::get_all(double &h_coord, double &k_coord, double &par_a, double &p
     par_b = b;
 }
 
-double* Ellipse::point_coordinates()
+void Ellipse::point_coordinates()
 {
-    double p_coord[8] = {h - a, k,
-                    h + a, k,
-                    h, k - a,
-                    h, k + a};
-    
-        return p_coord;
+    cout<< "V1_x(" << h - a << ", " << k << ")\n" <<
+           "V2_x(" << h + a << ", " << k << ")\n" <<
+           "V1_y(" << h << ", " << k - a  << ")\n" <<
+           "V2_y(" << h << ", " << k + a  << ")" <<endl;
 }
 
-double* Ellipse::focus_coordinates()
+void Ellipse::focus_coordinates()
 {
-    double f_coord[8] = {h - count_hyperparametr(), k,
-                      h + count_hyperparametr(), k,
-                      h, k - count_hyperparametr(),
-                      h, k + count_hyperparametr()};
-
-    return f_coord;
+    cout<< "F1_x(" << h - count_hyperparametr() << ", " << k << ")\n" <<
+           "F2_x(" << h + count_hyperparametr() << ", " << k << ")\n" <<
+           "F1_y(" << h << ", " << k - count_hyperparametr() << ")\n" <<
+           "F2_y(" << h << ", " << k + count_hyperparametr() << ")" <<endl;
 }
 
-double Ellipse::count_loc_hord()
+void Ellipse::count_loc_hord()
 {
-    return (2 * pow(b, 2)) / a;
+    cout<< "LR = " << (2 * pow(b, 2)) / a <<endl;
 }
 
-double Ellipse::count_excentritet()
+void Ellipse::count_excentritet()
 {
-    return count_hyperparametr() / a;
+    cout<< "e = " << count_hyperparametr() / a <<endl;;
 }
 
 void Ellipse::print_data()
 {
     cout<< "-----------DATA-----------" <<endl;
     cout<< "1)  (x - " << h << ")^2 / " << pow(a, 2) << " + (y - " << k << ")^2 / " << pow(b, 2) << "= 1" <<endl;
-    cout<< "2)  C(" << h << ", " << k << ")" <<endl;
-    cout<< "3)  V1_x(" << point_coordinates()[1] << ", " << point_coordinates()[2] << ")\n" <<
-            "   V2_x(" << point_coordinates()[3] << ", " << point_coordinates()[4] << ")\n" <<
-            "   V1_y(" << point_coordinates()[5] << ", " << point_coordinates()[6] << ")\n" <<
-            "   V2_y(" << point_coordinates()[7] << ", " << point_coordinates()[8] << ")" <<endl;
-    cout<< "4)  F1_x(" << focus_coordinates()[1] << ", " << focus_coordinates()[2] << ")\n" <<
-            "   F2_x(" << focus_coordinates()[3] << ", " << focus_coordinates()[4] << ")\n" <<
-            "   F1_y(" << focus_coordinates()[5] << ", " << focus_coordinates()[6] << ")\n" <<
-            "   F2_y(" << focus_coordinates()[7] << ", " << focus_coordinates()[8] << ")" <<endl;
+    cout<< "2)  C(" << h << ", " << k << ")" <<endl; 
 }
