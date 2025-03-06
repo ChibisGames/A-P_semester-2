@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Ellipse::Ellipse(int h_coord, int k_coord, int a_par, int b_par)
+Ellipse::Ellipse(double h_coord, double k_coord, double a_par, double b_par)
 {
     h = h_coord;
     k = k_coord;
@@ -26,9 +26,9 @@ Ellipse::Ellipse(const Ellipse &e)
 
 Ellipse::~Ellipse(){}
 
-void Ellipse::normalize_axis(int &par1, int &par2)
+void Ellipse::normalize_axis(double &par1, double &par2)
 {
-    int temp;
+    double temp;
 
     if (par1 > par2)
     {
@@ -43,7 +43,7 @@ double Ellipse::count_hyperparametr()
     return sqrt(pow(a, 2) - pow(b, 2));
 }
 
-void Ellipse::set_all(int h_coord, int k_coord, int par_a, int par_b)
+void Ellipse::set_all(double h_coord, double k_coord, double par_a, double par_b)
 {
     h = h_coord;
     k = k_coord;
@@ -51,7 +51,7 @@ void Ellipse::set_all(int h_coord, int k_coord, int par_a, int par_b)
     b = par_b;
 }
 
-void Ellipse::get_all(int &h_coord, int &k_coord, int &par_a, int &par_b)
+void Ellipse::get_all(double &h_coord, double &k_coord, double &par_a, double &par_b)
 {
     h_coord = h;
     k_coord = k;
@@ -95,4 +95,10 @@ void Ellipse::print_data()
     point_coordinates();
     cout<<endl;
     focus_coordinates();
+}
+
+void Ellipse::inside_status(double x, double y)
+{
+    if ((pow((x - h) / a, 2) + pow((y - k) / b, 2)) <= 1) {cout<< "Точка в границах эллипса" <<endl;}
+    else {cout<< "Точка вне эллипса" <<endl;}
 }
