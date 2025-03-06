@@ -4,12 +4,13 @@
 
 using namespace std;
 
-Ellipse::Ellipse(double h_coord, double k_coord, double a_par, double b_par)
+Ellipse::Ellipse(double h_coord, double k_coord, double a_par, double b_par, bool x_status)
 {
     h = h_coord;
     k = k_coord;
     a = a_par;
     b = b_par;
+    x_is_main = x_status;
 
     normalize_axis(b, a);
 }
@@ -20,6 +21,7 @@ Ellipse::Ellipse(const Ellipse &e)
     k = e.k;
     a = e.a;
     b = e.b;
+    x_is_main = e.x_is_main;
 
     normalize_axis(b, a);
 }
@@ -43,36 +45,50 @@ double Ellipse::count_hyperparametr()
     return sqrt(pow(a, 2) - pow(b, 2));
 }
 
-void Ellipse::set_all(double h_coord, double k_coord, double par_a, double par_b)
+void Ellipse::set_all(double h_coord, double k_coord, double par_a, double par_b, bool x_status)
 {
     h = h_coord;
     k = k_coord;
     a = par_a;
     b = par_b;
+    x_is_main = x_status;
 }
 
-void Ellipse::get_all(double &h_coord, double &k_coord, double &par_a, double &par_b)
+void Ellipse::get_all(double &h_coord, double &k_coord, double &par_a, double &par_b, bool &x_status)
 {
     h_coord = h;
     k_coord = k;
     par_a = a;
     par_b = b;
+    x_status = x_is_main;
 }
 
 void Ellipse::point_coordinates()
 {
-    cout<< "V1_x(" << h - a << ", " << k << ")\n" <<
-           "V2_x(" << h + a << ", " << k << ")\n" <<
-           "V1_y(" << h << ", " << k - a  << ")\n" <<
-           "V2_y(" << h << ", " << k + a  << ")" <<endl;
+    if (x_is_main)
+    {
+        cout<< "V1(" << h - a << ", " << k << ")\n" <<
+               "V2(" << h + a << ", " << k << ")" <<endl;
+    }
+    else
+    {
+        cout<< "V1(" << h << ", " << k - a  << ")\n" <<
+               "V2(" << h << ", " << k + a  << ")" <<endl;
+    }
 }
 
 void Ellipse::focus_coordinates()
 {
-    cout<< "F1_x(" << h - count_hyperparametr() << ", " << k << ")\n" <<
-           "F2_x(" << h + count_hyperparametr() << ", " << k << ")\n" <<
-           "F1_y(" << h << ", " << k - count_hyperparametr() << ")\n" <<
-           "F2_y(" << h << ", " << k + count_hyperparametr() << ")" <<endl;
+    if (x_is_main)
+    {
+    cout<< "F1(" << h - count_hyperparametr() << ", " << k << ")\n" <<
+           "F2(" << h + count_hyperparametr() << ", " << k << ")" <<endl;
+    }
+    else
+    {
+    cout<< "F1(" << h << ", " << k - count_hyperparametr() << ")\n" <<
+           "F2(" << h << ", " << k + count_hyperparametr() << ")" <<endl;
+    }
 }
 
 void Ellipse::count_loc_hord()
@@ -88,7 +104,7 @@ void Ellipse::count_excentritet()
 
 void Ellipse::print_data()
 {
-    cout<< "-----------DATA-----------" <<endl;
+    cout<< "\n-----------DATA-----------" <<endl;
     cout<< "(x - " << h << ")^2 / " << pow(a, 2) << " + (y - " << k << ")^2 / " << pow(b, 2) << " = 1\n" <<endl;
     cout<< "C(" << h << ", " << k << ")" <<endl;
     cout<<endl;
@@ -99,9 +115,18 @@ void Ellipse::print_data()
 
 void Ellipse::inside_status(double x, double y)
 {
-    if ((pow((x - h) / a, 2) + pow((y - k) / b, 2)) < 1) {cout<< "Точка внутри эллипса" <<endl;}
-    else if ((pow((x - h) / a, 2) + pow((y - k) / b, 2)) == 1) {cout<< "Точка принадлежит эллипсу" <<endl;}
-    else {cout<< "Точка вне эллипса" <<endl;}
+    if (x_is_main)
+    {
+        if ((pow((x - h) / a, 2) + pow((y - k) / b, 2)) < 1) {cout<< "Точка внутри эллипса" <<endl;}
+        else if ((pow((x - h) / a, 2) + pow((y - k) / b, 2)) == 1) {cout<< "Точка принадлежит эллипсу" <<endl;}
+        else {cout<< "Точка вне эллипса" <<endl;}
+    }
+    else
+    {
+        if ((pow((x - h) / b, 2) + pow((y - k) / a, 2)) < 1) {cout<< "Точка внутри эллипса" <<endl;}
+        else if ((pow((x - h) / b, 2) + pow((y - k) / a, 2)) == 1) {cout<< "Точка принадлежит эллипсу" <<endl;}
+        else {cout<< "Точка вне эллипса" <<endl;}
+    }
 }
 
 double Ellipse::calculate_perimeter()
@@ -112,4 +137,30 @@ double Ellipse::calculate_perimeter()
 double Ellipse::calculate_square()
 {
     return acos(-1) * a * b;
+}
+
+double Ellipse::calculate_coord(double par, bool x_given_status)
+{
+    if (x_given_status)
+    {
+        if (x_is_main)
+        {
+            return ((b / a) * sqrt(pow(a, 2) - pow(par - h, 2))) + k;
+        }
+        else
+        {
+            return ((a / b) * sqrt(pow(b, 2) - pow(par - h, 2))) + k;
+        }
+    }
+    else
+    {
+        if (x_is_main)
+        {
+            return ((a / b) * sqrt(pow(b, 2) - pow(par - k, 2))) + h;
+        }
+        else
+        {
+            return ((b / a) * sqrt(pow(a, 2) - pow(par - k, 2))) + h;
+        }
+    }
 }
