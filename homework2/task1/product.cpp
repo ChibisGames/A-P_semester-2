@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Product::Product(char code; char description, double cost, int amount, double longitude, double lattitude)
+Product::Product(char code[13]; char description[50], double cost, int amount, double longitude, double lattitude)
 {
     this->code = code;
     strcpy(this->description, description);
@@ -26,7 +26,7 @@ Product::Product(const Product &p)
 
 Product::~Product(){}
 
-void Product::set(char code, char description, double cost, int amount, double longitude, double lattitude)
+void Product::set(char code[13], char description[50], double cost, int amount, double longitude, double lattitude)
 {
     this->code = code;
     strcpy(this->description, description);
