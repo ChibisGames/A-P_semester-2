@@ -26,9 +26,8 @@ Product::Product(const Product &p)
 
 Product::~Product(){}
 
-void Product::set(char code[13], char description[50], double cost, int amount, double longitude, double lattitude)
+void Product::set(char description[50], double cost, int amount, double longitude, double lattitude)
 {
-    this->code = code;
     strcpy(this->description, description);
     this->cost = cost;
     this->amount = amount;
@@ -36,7 +35,7 @@ void Product::set(char code[13], char description[50], double cost, int amount, 
     this->lattitude = validate_component(lattitude, 41, 82);
 }
 
-void Product::get()
+void Product::get(char &code, char &description, double &cost, int &amount, double &longitude, double &lattitude)
 {
     code = this->code;
     strcpy(description, this->description);
