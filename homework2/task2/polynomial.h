@@ -15,14 +15,14 @@ public:
     Polynomial(const Polynomial &p);
     ~Polynomial();
 
-    double *get_koef();
+    double *get_coef();
     int *get_expo();
     int get_size();
     double get_x();
     void set_coef(double *coef, int size_coef);
     void set_expo();
     void set_size(int new_size);
-    void set_x();
+    void set_x(double new_x);
     void print();
 
     int get_pow();
@@ -31,4 +31,4 @@ public:
 
 Polynomial sum(Polynomial &p1, Polynomial &p2);
 Polynomial dif(Polynomial &p1, Polynomial &p2);
-Polynomial val(Polynomial &p);
+double val(Polynomial &p);

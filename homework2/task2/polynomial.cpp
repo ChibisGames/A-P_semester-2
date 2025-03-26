@@ -1,35 +1,73 @@
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 #include "polynomial.h"
 
 
 using namespace std;
 
-Polynomial sum(Polynomial &p1, Polynomial &p2) //TODO remake single equal for coef and arrays equal
+Polynomial sum(Polynomial &p1, Polynomial &p2)
 {
-    if ()
+    if (p1.get_size() == p2.get_size())
     {
-        Polynomial p = p(1, p1.size);
-        for (int i; i < p.size, i++)
+        Polynomial p(1, p1.get_size());
+        double *a = new double[p.get_size()];
+
+        double *p1_coef;
+        p1_coef = p1.get_coef();
+        double *p2_coef;
+        p2_coef = p2.get_coef();
+
+        for (int i = 0; i < p.get_size(); i++)
         {
-            p.set_coef = p1[i] + p2[i];
-            p.set_expo
+            a[i] = p1_coef[i] + p2_coef[i];
         }
+        p.set_coef(a, p.get_size());
+        return p;
     }
     else
     {
         cout << "Different size of objects" << endl;
+        return Polynomial();
     }
 }
 
 Polynomial dif(Polynomial &p1, Polynomial &p2)
 {
+    if (p1.get_size() == p2.get_size())
+    {
+        Polynomial p(1, p1.get_size());
+        double *a = new double[p.get_size()];
 
+        double *p1_coef;
+        p1_coef = p1.get_coef();
+        double *p2_coef;
+        p2_coef = p2.get_coef();
+
+        for (int i = 0; i < p.get_size(); i++)
+        {
+            a[i] = p1_coef[i] - p2_coef[i];
+        }
+        p.set_coef(a, p.get_size());
+        return p;
+    }
+    else
+    {
+        cout << "Different size of objects" << endl;
+        return Polynomial();
+    }
 }
 
-Polynomial val(Polynomial &p)
+double val(Polynomial &p)
 {
-
+    double x, *p_coef, result = 0;
+    p_coef = p.get_coef();
+    
+    for (int i = 0; i < p.get_size(); i++)
+    {
+        result += pow(x, i) * p_coef[i];
+    }
+    return result;
 }
 
 
@@ -47,6 +85,10 @@ Polynomial::Polynomial(double new_x, int new_size)
     this->size = new_size;
     this->coef_vect = new double[new_size];
     this->expo_vect = new int[new_size];
+    for (int i = 0; i < this->size; i++)
+    {
+        this->expo_vect[i] = i;
+    }
     this->x = new_x;
 }
 
@@ -65,13 +107,20 @@ void Polynomial::print()
     cout << "Polynomial:\n" << setw(10) << "coefficients: ";
     for (int i = 0; i < this->size; i++)
     {
-        cout << this->coef_vect[i] << " ";
+        if (i == 0)
+        {
+            cout << this->coef_vect[i] << " ";
+        }
+        else
+        {
+            cout << this->coef_vect[i] << "*x^" << this->expo_vect[i] <<" ";
+        }
     }
     cout << endl;
     cout << setw(10) << "x: " << this->x << endl;
 }
 
-double *Polynomial::get_koef()
+double *Polynomial::get_coef()
 {
     return this->coef_vect;
 }
@@ -126,12 +175,8 @@ void Polynomial::set_size(int new_size)
             }
             delete[] this->coef_vect;
             this->coef_vect = a;
-
-            cout << "Input new coefficients:" << endl;
             for (int i = this->size; i < new_size; i++)
             {
-                printf("a%d = ", i);
-                cin >> this->coef_vect[i];
                 this->expo_vect[i] = i;
             }
         }
@@ -156,5 +201,5 @@ void Polynomial::set_x(double new_x)
 
 int Polynomial::get_pow()
 {
-    return this->expo_vect[this->set_size - 1];
+    return this->expo_vect[this->size - 1];
 }
