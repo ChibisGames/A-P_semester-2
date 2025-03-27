@@ -62,6 +62,7 @@ double val(Polynomial &p)
 {
     double x, *p_coef, result = 0;
     p_coef = p.get_coef();
+    x = p.get_x();
     
     for (int i = 0; i < p.get_size(); i++)
     {
