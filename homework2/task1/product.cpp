@@ -1,12 +1,23 @@
 #include <iostream>
-#include "product.h"
 #include <cstring>
+#include <iomanip>
+#include "product.h"
 
 using namespace std;
 
-Product::Product(char code[13]; char description[50], double cost, int amount, double longitude, double lattitude)
+Product::Product()
 {
-    this->code = code;
+    this->code = -1;
+    strcpy(this->description, "");
+    this->cost = 0.0;
+    this->amount = 0;
+    this->longitude = 0.0;
+    this->lattitude = 0.0;
+}
+
+Product::Product(char description[50], double cost, int amount, double longitude, double lattitude)
+{
+    this->code = (1 + rand() % 2) * 1000000000 + (1 + rand() % 999999);
     strcpy(this->description, description);
     this->cost = cost;
     this->amount = amount;
@@ -35,7 +46,8 @@ void Product::set(char description[50], double cost, int amount, double longitud
     this->lattitude = validate_component(lattitude, 41, 82);
 }
 
-void Product::get(char &code, char &description, double &cost, int &amount, double &longitude, double &lattitude)
+
+void Product::get(int &code, char* &description, double &cost, int &amount, double &longitude, double &lattitude)
 {
     code = this->code;
     strcpy(description, this->description);
@@ -45,14 +57,15 @@ void Product::get(char &code, char &description, double &cost, int &amount, doub
     lattitude = this->lattitude;
 }
 
+
 void Product::print()
 {
-    cout<< "Code: " << code << "\n"
-    << "Description: " << description << "\n"
-    << "Cost: " << cost << "\n"
-    << "Amount: " << amount << "\n"
-    << "Longitude: " << longitude << "\n"
-    << "Lattitude: " << lattitude <<endl;
+    cout<< setw(3) << "460" << setw(12) << this->code <<
+    setw(15) << this->description <<
+    setw(10) << this->cost <<
+    setw(10) << this->amount <<
+    setw(10) << this->longitude <<
+    setw(10) << this->lattitude <<endl;
 }
 
 double Product::validate_component(double comp, double min, double max)
