@@ -119,16 +119,14 @@ void Warehouse::delete_product(char search_criteria[50]){
     int pos = this->search_product(search_criteria);
 
     if (pos != -1){
-        if (pos == this->size - 1){
-
-            this->list[pos] = this->list[pos - 1];
-        }
-
+        this->amount = this->amount + this->list[pos].amount;
+        
         for (int i = pos; i < this->get_size()-1; i++){
             this->list[i] = this->list[i+1];
-            this->size--;
-            this->set_size(this->size);
-            cout<< "Product deleted" <<endl;
-        }   
+        }
+        this->size--;
+        this->set_size(this->size);
+        cout<< "Product deleted" <<endl;
+           
     } else {cout<< "Product not found!" <<endl;}
 }
