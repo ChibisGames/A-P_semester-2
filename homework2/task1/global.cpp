@@ -39,21 +39,45 @@ void insert_new_product(Warehouse list[3]){
     && calculate_dist(list[0], longitude, lattitude) < calculate_dist(list[2], longitude, lattitude)){
         if (list[0].amount > 0){
             list[0].insert_product(description, cost, amount, longitude, lattitude);
-        } else {cout<< "Unable to insert on that warehouse!" <<endl;} 
+        }else if (calculate_dist(list[1], longitude, lattitude) <= calculate_dist(list[2], longitude, lattitude)){
+            if (list[1].amount > 0){
+                list[1].insert_product(description, cost, amount, longitude, lattitude);
+            } 
+        }else if (calculate_dist(list[1], longitude, lattitude) > calculate_dist(list[2], longitude, lattitude)){
+            if (list[2].amount > 0){
+                list[2].insert_product(description, cost, amount, longitude, lattitude);
+            }
+        }else {cout<< "Unable to insert in warehouse!" <<endl;}
     }
 
     if (calculate_dist(list[1], longitude, lattitude) < calculate_dist(list[0], longitude, lattitude) 
     && calculate_dist(list[1], longitude, lattitude) < calculate_dist(list[2], longitude, lattitude)){
         if (list[1].amount > 0){
             list[1].insert_product(description, cost, amount, longitude, lattitude);
-        } else {cout<< "Unable to insert on that warehouse!" <<endl;}
+        }else if (calculate_dist(list[0], longitude, lattitude) <= calculate_dist(list[2], longitude, lattitude)){
+            if (list[0].amount > 0){
+                list[0].insert_product(description, cost, amount, longitude, lattitude);
+            } 
+        }else if (calculate_dist(list[0], longitude, lattitude) > calculate_dist(list[2], longitude, lattitude)){
+            if (list[2].amount > 0){
+                list[2].insert_product(description, cost, amount, longitude, lattitude);
+            }
+        }else {cout<< "Unable to insert in warehouse!" <<endl;}
     }
 
     if (calculate_dist(list[2], longitude, lattitude) < calculate_dist(list[0], longitude, lattitude) 
     && calculate_dist(list[2], longitude, lattitude) < calculate_dist(list[1], longitude, lattitude)){
         if (list[2].amount > 0){
             list[2].insert_product(description, cost, amount, longitude, lattitude);
-        } else {cout<< "Unable to insert on that warehouse!" <<endl;}
+        }else if (calculate_dist(list[0], longitude, lattitude) <= calculate_dist(list[1], longitude, lattitude)){
+            if (list[0].amount > 0){
+                list[0].insert_product(description, cost, amount, longitude, lattitude);
+            } 
+        }else if (calculate_dist(list[0], longitude, lattitude) > calculate_dist(list[1], longitude, lattitude)){
+            if (list[1].amount > 0){
+                list[1].insert_product(description, cost, amount, longitude, lattitude);
+            }
+        }else {cout<< "Unable to insert in warehouse!" <<endl;}
     }
 }
 
